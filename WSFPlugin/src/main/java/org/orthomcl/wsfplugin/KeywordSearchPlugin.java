@@ -69,7 +69,7 @@ public class KeywordSearchPlugin extends AbstractOracleTextSearchPlugin {
       wdkModel = InstanceManager.getInstance(WdkModel.class, projectId);
       
       String sql = getQuery(detailTable, primaryKeyColumn, projectId, quotedFields.toString());
-      ps = SqlUtils.getPreparedStatement(wdkModel.getAppDb().getDataSource(), sql);
+      ps = SqlUtils.getPreparedStatement(wdkModel.getAppDb().getDataSource(), sql, SqlUtils.Autocommit.OFF);
       logger.debug("oracleTextExpression = \"" + oracleTextExpression + "\"");
       ps.setString(1, oracleTextExpression);
       textSearch(results, ps, primaryKeyColumn, sql, "OrthoMclTextSearch");
